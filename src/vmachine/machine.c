@@ -2,7 +2,7 @@
 #include "memfunc.h"
 
 void initMachine(memcell* memory, unsigned int memSize, FILE* file){
-    memory = (memcell*) malloc(memSize * sizeof(memcell));
+    //memory = (memcell*) malloc(memSize * sizeof(memcell));
     if(memory == NULL){
         printf("Error while allocating, exiting...\n");
         exit(0);
@@ -23,11 +23,12 @@ void initMachine(memcell* memory, unsigned int memSize, FILE* file){
 }
 
 void runMachine(memcell* memory, unsigned int memSize, int verbose){
+    if (verbose) printf("VERBOSE MODE\n");
     int execRegister = 0;
     int instructionCount = 0;
 
     while(execRegister < memSize){
-        if (verbose) printf("INS:%05d ADDR 0x%04x    >>:    ", instructionCount, execRegister);
+        if (verbose) printf("INS:%05d ADDR 0x%04x    >>:(OP %02x)    ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
 
@@ -52,13 +53,15 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             break;
 
         case 0: //HALT
-            if (verbose) printf("STOP\n");
-            printf("Stopped at address 0x%04x\n", *currentAddress);
+            if (verbose) {
+                printf("STOP\n");
+                printf("Stopped at address 0x%04x\n", *currentAddress);
+            }
             exit(0);
 
         case 1: //SET
-            if (verbose) printf("SET 0x%04x to %d\n", addressRefA, memory[*currentAddress + 4]);
-            memory[addressRefA] = memory[*currentAddress + 4];
+            if (verbose) printf("SET 0x%04x to 0x%x\n", addressRefA, memory[*currentAddress + 3]);
+            memory[addressRefA] = memory[*currentAddress + 3];
             *currentAddress += 4;
             break;
 
@@ -123,13 +126,15 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
 
         case 11: //PRINT
             if (verbose) printf("PRINT 0x%04x   : ", addressRefA);
-            printf("%c\n", memory[addressRefA]);
+            printf("%c", memory[addressRefA]);
+            if (verbose) printf("\n");
+            *currentAddress += 3;
             break;
 
         default:
             printf("Error: Current address register is not an instruction.\n");
             printf("Crash ocurred at address 0x%04x\n", *currentAddress);
-            exit(0);
+            exit(-1);
     }
     return;
 }

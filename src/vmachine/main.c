@@ -17,13 +17,14 @@ int main(int argc, char** argv){
         return -1;
     }
 
-    int verbose;
-    if(strcmp(argv[2], "-v") == 0 || argc >= 3) verbose = 1;
-    else verbose = 0;
+    int verbose = 0;
+    if(argc > 2){
+        if(strcmp(argv[2], "-v") == 0) verbose = 1;
+    }
     
     initMachine(memory, MEMORY_SIZE, file);
-    fclose(file);
 
     runMachine(memory, MEMORY_SIZE, verbose);
+    fclose(file);
     return 1;
 }
