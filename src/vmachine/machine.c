@@ -125,8 +125,11 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             break;
 
         case 11: //PRINT
-            if (verbose) printf("PRINT 0x%04x   : ", addressRefA);
-            printf("%c", memory[addressRefA]);
+            if (verbose){
+                 printf("PRINT 0x%04x   : ", addressRefA);
+                 if (memory[addressRefA] >= 32) printf("%c", memory[addressRefA]);
+            }
+            else printf("%c", memory[addressRefA]);
             if (verbose) printf("\n");
             *currentAddress += 3;
             break;
