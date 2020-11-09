@@ -21,7 +21,7 @@ The machine supports up to a maximum of 256 instructions (0x00 to 0xFF).
 | **AND** | 8 | 0x08 | 5 | Performs bitwise AND between A and B, stores the result in A | and A B
 | **OR** | 9 | 0x09 | 5 | Performs bitwise OR between A and B, stores the result in A | or A B
 | **XOR** | 10 | 0x0A | 5 | Performs bitwise XOR between A and B, stores the result in A | xor A B
-| **PRT** | 11 | 0x0B | 3 | Prints content of A | prt A
+| **PRINT** | 11 | 0x0B | 3 | Prints content of A | print A
 
 
 ### MEMORY

@@ -25,17 +25,17 @@ void initMachine(memcell* memory, unsigned int memSize, FILE* file){
 void runMachine(memcell* memory, unsigned int memSize, int verbose){
     if (verbose) printf("VERBOSE MODE\n");
     int execRegister = 0;
-    int instructionCount = 0;
+    int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("INS:%05d ADDR 0x%04x    >>:(OP %02x)    ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("INS:%05d ADDR 0x%04X    >>:(OP %02x)    ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
-
+        /*
         if (instructionCount >= 100000){
             printf("Possible infinite loop, machine aborted.\n");
             return;
-        }
+        }*/
     }
     printf("Execution address exceeded max value.\n");
     return;
@@ -55,78 +55,78 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
         case 0: //HALT
             if (verbose) {
                 printf("STOP\n");
-                printf("Stopped at address 0x%04x\n", *currentAddress);
+                printf("Stopped at address 0x%04X\n", *currentAddress);
             }
             exit(0);
 
         case 1: //SET
-            if (verbose) printf("SET 0x%04x TO 0x%x\n", addressRefA, memory[*currentAddress + 3]);
+            if (verbose) printf("SET 0x%04X TO 0x%X\n", addressRefA, memory[*currentAddress + 3]);
             memory[addressRefA] = memory[*currentAddress + 3];
             *currentAddress += 4;
             break;
 
         case 2: //MOV
-            if (verbose) printf("MOV 0x%04x TO 0x%04x\n", addressRefA, addressRefB);
+            if (verbose) printf("MOV 0x%04X TO 0x%04X\n", addressRefA, addressRefB);
             memory[addressRefB] = memory[addressRefA];
             *currentAddress += 5;
             break;
 
         case 3: //JMP
-            if (verbose) printf("JMP TO 0x%04x\n", addressRefA);
+            if (verbose) printf("JMP TO 0x%04X\n", addressRefA);
             *currentAddress = addressRefA;
             break;
 
         case 4: //JNT
             if (memory[addressRefB] != 0) {
-                if (verbose) printf("JNT TO 0x%04x (EVAL AT 0x%04x)\n", addressRefA, addressRefB);
+                if (verbose) printf("JNT TO 0x%04X (EVAL AT 0x%04X)\n", addressRefA, addressRefB);
                 *currentAddress = addressRefA;
                 break;
             }
             else {
-                if (verbose) printf("JNT NO JUMP (EVAL AT 0x%04x)\n", addressRefB);
+                if (verbose) printf("JNT NO JUMP (EVAL AT 0x%04X)\n", addressRefB);
                 *currentAddress += 5;
                 break;
             }
 
         case 5: //ADD
-            if (verbose) printf("ADD 0x%04x TO 0x%04x\n", addressRefB, addressRefA);
+            if (verbose) printf("ADD 0x%04X TO 0x%04X\n", addressRefB, addressRefA);
             memory[addressRefA] += memory[addressRefB];
             *currentAddress += 5;
             break;
 
         case 6: //SUB
-            if (verbose) printf("SUB 0x%04x TO 0x%04x\n", addressRefB, addressRefA);
+            if (verbose) printf("SUB 0x%04X TO 0x%04X\n", addressRefB, addressRefA);
             memory[addressRefA] -= memory[addressRefB];
             *currentAddress += 5;
             break;
 
         case 7: //NOT
             memory[addressRefA] = ~(memory[addressRefA]);
-            if (verbose) printf("NOT 0x%04x\n", addressRefA);
+            if (verbose) printf("NOT 0x%04X\n", addressRefA);
             *currentAddress += 3;
             break;
 
         case 8: //AND
-            if (verbose) printf("AND 0x%04x && 0x%04x\n", addressRefA, addressRefB);
+            if (verbose) printf("AND 0x%04X && 0x%04X\n", addressRefA, addressRefB);
             memory[addressRefA] = memory[addressRefA] & memory[addressRefB];
             *currentAddress += 5;
             break;
 
         case 9: //OR
-            if (verbose) printf("OR 0x%04x || 0x%04x\n", addressRefA, addressRefB);
+            if (verbose) printf("OR 0x%04X || 0x%04X\n", addressRefA, addressRefB);
             memory[addressRefA] = memory[addressRefA] | memory[addressRefB];
             *currentAddress += 5;
             break;
 
         case 10: //XOR
-            if (verbose) printf("XOR 0x%04x ^ 0x%04x\n", addressRefA, addressRefB);
+            if (verbose) printf("XOR 0x%04X ^ 0x%04X\n", addressRefA, addressRefB);
             memory[addressRefA] = memory[addressRefA] ^ memory[addressRefB];
             *currentAddress += 5;
             break;
 
         case 11: //PRINT
             if (verbose){
-                printf("PRINT 0x%04x   : ", addressRefA);
+                printf("PRINT 0x%04X   : ", addressRefA);
                 if (memory[addressRefA] >= 32) printf("%c", memory[addressRefA]);
                 printf("\n");
             }
@@ -136,7 +136,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
 
         default:
             printf("Error: Current address register is not an instruction.\n");
-            printf("Crash ocurred at address 0x%04x\n", *currentAddress);
+            printf("Crash ocurred at address 0x%04X\n", *currentAddress);
             exit(-1);
     }
     return;
