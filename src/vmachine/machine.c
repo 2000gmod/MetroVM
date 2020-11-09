@@ -60,13 +60,13 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             exit(0);
 
         case 1: //SET
-            if (verbose) printf("SET 0x%04x to 0x%x\n", addressRefA, memory[*currentAddress + 3]);
+            if (verbose) printf("SET 0x%04x TO 0x%x\n", addressRefA, memory[*currentAddress + 3]);
             memory[addressRefA] = memory[*currentAddress + 3];
             *currentAddress += 4;
             break;
 
         case 2: //MOV
-            if (verbose) printf("MOV 0x%04x to 0x%04x\n", addressRefA, addressRefB);
+            if (verbose) printf("MOV 0x%04x TO 0x%04x\n", addressRefA, addressRefB);
             memory[addressRefB] = memory[addressRefA];
             *currentAddress += 5;
             break;
