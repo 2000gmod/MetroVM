@@ -14,7 +14,7 @@ The machine supports up to a maximum of 256 instructions (0x00 to 0xFF).
 | **SET** | 1 | 0x01 | Sets content of A to a 1-byte integer | set A NUM
 | **MOV** | 2 | 0x02 | Copies (moves) content of A into B | mov A B
 | **JMP** | 3 | 0x03 | Sets the instruction register to location A | jmp A
-| **JMZ** | 4 | 0x04 | Same as JMP but only if content of B is 0 | jmz A B
+| **JNT** | 4 | 0x04 | Same as JMP but only if content of B is not 0 | jnt A B
 | **ADD** | 5 | 0x05 | Adds content of B to content of A | add A B
 | **SUB** | 6 | 0x06 | Subtracts the content of B to the content of A | sub A B
 | **NOT** | 7 | 0x07 | Inverts all bits in memory cell A | not A

@@ -76,14 +76,14 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             *currentAddress = addressRefA;
             break;
 
-        case 4: //JMZ
-            if (memory[addressRefB] == 0) {
-                if (verbose) printf("JMZ TO 0x%04x (EVAL AT 0x%04x)\n", addressRefA, addressRefB);
+        case 4: //JNT
+            if (memory[addressRefB] != 0) {
+                if (verbose) printf("JNT TO 0x%04x (EVAL AT 0x%04x)\n", addressRefA, addressRefB);
                 *currentAddress = addressRefA;
                 break;
             }
             else {
-                if (verbose) printf("JMZ NO JUMP (EVAL AT 0x%04x)\n", addressRefB);
+                if (verbose) printf("JNT NO JUMP (EVAL AT 0x%04x)\n", addressRefB);
                 *currentAddress += 5;
                 break;
             }
