@@ -23,12 +23,15 @@ void initMachine(memcell* memory, unsigned int memSize, FILE* file){
 }
 
 void runMachine(memcell* memory, unsigned int memSize, int verbose){
-    if (verbose) printf("VERBOSE MODE\n");
+    if (verbose){
+        printf("VERBOSE MODE\n");
+        printf("INSTRUCTION  ADDRESS   OPCODE        DESCRIPTION \n");
+    }
     int execRegister = 0;
     int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("INS:%05d ADDR 0x%04X    >>:(OP %02X)    ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("INS:%05d    0x%04X    >>:(OP %02X)    ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
         /*
