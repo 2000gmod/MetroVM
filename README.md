@@ -22,6 +22,7 @@ The machine supports up to a maximum of 256 instructions (0x00 to 0xFF).
 | **OR** | 9 | 0x09 | 5 | Performs bitwise OR between A and B, stores the result in A | or A B
 | **XOR** | 10 | 0x0A | 5 | Performs bitwise XOR between A and B, stores the result in A | xor A B
 | **PRINT** | 11 | 0x0B | 3 | Prints content of A | print A
+| **SCAN** | 12 | 0x0C | 3 | Recieves input from keyboard and stores it at A and the followings cells, depending on how many characters | scan A
 
 
 ### MEMORY

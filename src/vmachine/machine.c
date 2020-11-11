@@ -28,7 +28,7 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
     int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("INS:%05d ADDR 0x%04X    >>:(OP %02x)    ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("INS:%05d ADDR 0x%04X    >>:(OP %02X)    ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
         /*
@@ -60,7 +60,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             exit(0);
 
         case 1: //SET
-            if (verbose) printf("SET 0x%04X TO 0x%X\n", addressRefA, memory[*currentAddress + 3]);
+            if (verbose) printf("SET 0x%04X TO 0x%02X\n", addressRefA, memory[*currentAddress + 3]);
             memory[addressRefA] = memory[*currentAddress + 3];
             *currentAddress += 4;
             break;
@@ -132,6 +132,11 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             }
             else printf("%c", memory[addressRefA]);
             *currentAddress += 3;
+            break;
+
+        case 12: //SCAN
+            if (verbose) printf("SCAN AT 0x%04X   : ", addressRefA);
+            scanf("%s", &memory[addressRefA]);
             break;
 
         default:
