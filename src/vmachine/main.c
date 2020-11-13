@@ -8,7 +8,7 @@ memcell memory[MEMORY_SIZE];
 
 int main(int argc, char** argv){
     if(argc == 1){
-        printf("Error: No executable file (.vmx) specified.\n");
+        printf("Error: No executable file (.vx) specified.\n");
         return -1;
     }
     FILE *file = fopen(argv[1], "r");
