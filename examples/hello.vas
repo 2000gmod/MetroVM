@@ -1,0 +1,12 @@
+set 0a00 48
+set 0a01 65
+set 0a02 6c
+set 0a03 6c
+set 0a04 6f
+set 0a05 0a
+print 0a00
+print 0a01
+print 0a02
+print 0a03
+print 0a04
+print 0a05
