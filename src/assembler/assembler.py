@@ -40,13 +40,13 @@ for linea in inputFile:
     lineaList = linea.split(" ")
     outputFile.write(chr(getOpcode(lineaList[0])))
     for arg in range(1, len(lineaList)):
-        #print(len(lineaList[arg]), lineaList[arg])
         if len(lineaList[arg]) == 2:
             outputFile.write(chr(int(lineaList[arg], 16)))
             continue
         elif len(lineaList[arg]) == 4:
-            byte1 = lineaList[arg][:1]
+            byte1 = lineaList[arg][:2]
             byte2 = lineaList[arg][2:]
+            #print(byte1, byte2)
             outputFile.write(chr(int(byte1, 16)))
             outputFile.write(chr(int(byte2, 16)))
         else:
