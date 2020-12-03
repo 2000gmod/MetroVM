@@ -32,8 +32,8 @@ def getOpcode(insName):
 
 
 
-inputFile = open("examples/hello.vas", "r")
-outputFile = open("examples/hello.vx", "w")
+inputFile = open(sys.argv[1], "r")
+outputFile = open(sys.argv[2], "w")
 lineCounter = 0
 for linea in inputFile:
     linea = linea.rstrip("\n")
