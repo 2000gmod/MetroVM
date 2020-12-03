@@ -1,16 +1,6 @@
 import sys
 import math as m
 
-def getArgSize(opcode):
-    if opcode == 255 or opcode == 0:
-        return 0
-    elif opcode == 3 or opcode == 7 or opcode == 11 or opcode == 12:
-        return 2
-    elif opcode == 1:
-        return 3
-    else:
-        return 4
-
 def getOpcode(insName):
     if insName == 'nop': return 255
     elif insName == 'stop': return 0
@@ -36,6 +26,8 @@ inputFile = open(sys.argv[1], "r")
 outputFile = open(sys.argv[2], "w")
 lineCounter = 0
 for linea in inputFile:
+    if len(linea) <= 1:
+        continue
     linea = linea.rstrip("\n")
     lineaList = linea.split(" ")
     outputFile.write(chr(getOpcode(lineaList[0])))
