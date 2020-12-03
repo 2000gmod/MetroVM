@@ -144,7 +144,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             break;
 
         default:
-            printf("Error: Current address register is not an instruction.\n");
+            printf("Error: Invalid opcode.\n");
             printf("Crash ocurred at address 0x%04X\n", *currentAddress);
             exit(-1);
     }
