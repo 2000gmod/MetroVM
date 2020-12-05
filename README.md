@@ -42,7 +42,7 @@ The assembler does NOT accept comments, these exceptions are handled by a prepro
 The instruction set is detailed in the CPU INSTRUCTIONS section.
 
 ## MEMORY
-MetroVM uses a 2-byte memory address, so it is limited to a max of $2^{16}$ addresses, this results in a virtual RAM capacity of 65 536 bytes, you can optionally lower this inside the source and recompile.
+MetroVM uses a 2-byte memory address, so it is limited to a max of 2^16 addresses, this results in a virtual RAM capacity of 65 536 bytes, you can optionally lower this inside the source and recompile.
 
 
  
