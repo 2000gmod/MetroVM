@@ -35,7 +35,7 @@ is valid code, meanwhile:
 
 `set 0A00 43 print 0A00` <br> will not be accepted.
 
-Any character NOT part of the instruction will be ignored.<br>
+Any character NOT part of the instruction will return an error.<br>
 The assembler does NOT accept comments, these exceptions are handled by a preprocessor (not yet included).
 
 The instruction set is detailed in the CPU INSTRUCTIONS section.
