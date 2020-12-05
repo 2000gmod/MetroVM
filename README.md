@@ -1,6 +1,7 @@
 # MetroVM
 _A virtual CPU built on a custom architecture and instruction set._
-## INTRODUCTION
+
+![Banner Image](gitImages/banneredited.png)
 MetroVM is a virtual CPU that executes instructions inside a virtual RAM.
 
 ## USAGE
