@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MEMORY_SIZE 64000
+#define MEMORY_SIZE 65536
 
 typedef unsigned char memcell;
 

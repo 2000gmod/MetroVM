@@ -9,3 +9,13 @@ unsigned short getShortFromCell(memcell* memory, int address){
     
     return out;
 }
+
+int getUsedMemory(memcell* memory, int memSize){
+    int counter = 0;
+    for (int k = 0; k < memSize; k++){
+        if (memory[k] != 0) {
+            counter++;
+        }
+    }
+    return counter;
+}

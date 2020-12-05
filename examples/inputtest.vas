@@ -1,0 +1,7 @@
+scan 0a00
+
+print 0a00
+print 0a01
+print 0a02
+print 0a03
+print 0a04

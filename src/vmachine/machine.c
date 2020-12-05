@@ -24,7 +24,9 @@ void initMachine(memcell* memory, unsigned int memSize, FILE* file){
 
 void runMachine(memcell* memory, unsigned int memSize, int verbose){
     if (verbose){
-        printf("VERBOSE MODE\n");
+        int used = getUsedMemory(memory, memSize);
+        printf("VERBOSE MODE   | |  ");
+        printf("LOADED MEMORY: %d bytes | |  TOTAL MEMORY: %d bytes\n", used, memSize);
         printf("INSTRUCTION  ADDRESS   OPCODE        DESCRIPTION \n");
     }
     int execRegister = 0;
@@ -70,7 +72,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
 
         case 2: //MOV
             if (verbose) printf("MOV 0x%04X TO 0x%04X\n", addressRefA, addressRefB);
-            memory[addressRefB] = memory[addressRefA];
+            memory[addressRefA] = memory[addressRefB];
             *currentAddress += 5;
             break;
 
@@ -139,8 +141,9 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             break;
 
         case 12: //SCAN
-            if (verbose) printf("SCAN AT 0x%04X   : ", addressRefA);
+            if (verbose) printf("SCAN TO 0x%04X   : ", addressRefA);
             scanf("%s", &memory[addressRefA]);
+            *currentAddress += 3;
             break;
 
         default:
