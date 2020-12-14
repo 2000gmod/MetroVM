@@ -1,8 +1,11 @@
 CC = gcc
-CFLAGS = -I
+
+CFLAGS = -Wall
+
+TARGET = vmachine
 
 compile:
-	gcc -o vmachine ./src/vmachine/*.c
+	$(CC) $(CFLAGS) -o $(TARGET) src/vmachine/*.c
 
 clean:
-	rm -f vmachine
+	$(RM) $(TARGET)
