@@ -60,7 +60,8 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
         case 0: //HALT
             if (verbose) {
                 printf("STOP\n");
-                printf("Stopped at address 0x%04X\n", *currentAddress);
+                printf("STOPPED AT ADDRESS 0x%04X\n", *currentAddress);
+                printf("FINAL USED MEMORY: %d bytes  || TOTAL MEMORY: %d bytes\n", getUsedMemory(memory, MEMORY_SIZE), MEMORY_SIZE);
             }
             exit(0);
 
