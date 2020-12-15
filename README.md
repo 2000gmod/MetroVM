@@ -1,9 +1,8 @@
 # MetroVM
-_A virtual CPU built on a custom architecture and instruction set._
 
 ![Banner Image](gitImages/banneredited.png)
 
-MetroVM is a virtual CPU that executes instructions inside a virtual RAM.
+_MetroVM is a virtual CPU that executes instructions inside a virtual RAM._
 
 ## USAGE
 Compile all the `.c` files inside the `src/vmachine` directory using the compiler of your choice.<br> 
@@ -51,7 +50,7 @@ MetroVM uses a 2-byte memory address, so it is limited to a max of 2^16 addresse
 ## CPU INSTRUCTIONS
 **This is the instruction table for the machine:**
 
-Note: all letters represent a 2-byte memory address. The only exception is NUM, which represents a 1-byte integer.
+_Note: all letters represent a 2-byte memory address. The only exception is NUM, which represents a 1-byte integer._
 
 ### STANDARD SET
 
@@ -61,7 +60,7 @@ Note: all letters represent a 2-byte memory address. The only exception is NUM, 
 | **STOP** | 0 | 0x00 | 1 | Stops the execution of the machine | stop
 | **SET** | 1 | 0x01 | 4 | Sets content of A to a 1-byte integer | set A NUM
 | **MOV** | 2 | 0x02 | 5 | Copies (moves) content of B into A | mov A B
-| **JMP** | 3 | 0x03 | 3 | Sets the instruction register to location L | jmp L
+| **JMP** | 3 | 0x03 | 3 | Sets (jumps) the instruction register to location L | jmp L
 | **JNT** | 4 | 0x04 | 5 | Same as JMP but only if content of A is not 0 | jnt L A
 | **ADD** | 5 | 0x05 | 5 | Adds content of B to content of A | add A B
 | **SUB** | 6 | 0x06 | 5 | Subtracts the content of B to the content of A | sub A B
@@ -70,7 +69,7 @@ Note: all letters represent a 2-byte memory address. The only exception is NUM, 
 | **OR** | 9 | 0x09 | 5 | Performs bitwise OR between A and B, stores the result in A | or A B
 | **XOR** | 10 | 0x0A | 5 | Performs bitwise XOR between A and B, stores the result in A | xor A B
 | **PRINT** | 11 | 0x0B | 3 | Prints content of A | print A
-| **SCAN** | 12 | 0x0C | 3 | Recieves input from keyboard and stores it at A and the followings cells, depending on how many characters | scan A
+| **SCAN** | 12 | 0x0C | 3 | Recieves input from keyboard and stores it at A and the following bytes, depending on how many characters | scan A
 
 ***
 ### EXTENDED SET

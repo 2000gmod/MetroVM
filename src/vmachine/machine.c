@@ -26,7 +26,7 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
     if (verbose){
         int used = getUsedMemory(memory, memSize);
         printf("VERBOSE MODE   | |  ");
-        printf("LOADED MEMORY: %d bytes | |  TOTAL MEMORY: %d bytes\n", used, memSize);
+        printf("LOADED MEMORY: %d bytes  | |  TOTAL MEMORY: %d bytes\n", used, memSize);
         printf("INSTRUCTION  ADDRESS   OPCODE        DESCRIPTION \n");
     }
     int execRegister = 0;
@@ -61,7 +61,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             if (verbose) {
                 printf("STOP\n");
                 printf("STOPPED AT ADDRESS 0x%04X\n", *currentAddress);
-                printf("FINAL USED MEMORY: %d bytes  || TOTAL MEMORY: %d bytes\n", getUsedMemory(memory, MEMORY_SIZE), MEMORY_SIZE);
+                printf("MEMORY USE AT STOP: %d bytes\n", getUsedMemory(memory, MEMORY_SIZE));
             }
             exit(0);
 

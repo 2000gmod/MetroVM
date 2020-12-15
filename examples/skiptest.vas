@@ -1,0 +1,3 @@
+set 0a00 10
+nop
+print 0a00
