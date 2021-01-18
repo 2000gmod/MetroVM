@@ -24,7 +24,7 @@ For example, if the file contains:
 After that, the machine will read the next instruction.
 Therefore, it is possible to program directly in a hex editor, but for practical purposes, it is not recommended.
 
-Included in the main folder is a Python script named _asmscript.py_ used to comvert from a human readable assembly format to the executable format.
+Included in the main folder is a Python script named _asmscript_ used to convert from a human readable assembly format to the executable format.
 
 ### Assembly Syntax
 The assembler expects 1 command per line. For example:
@@ -73,7 +73,7 @@ _Note: all letters represent a 2-byte memory address. The only exception is NUM,
 
 ***
 ### EXTENDED SET
-**NOT YET IMPLEMENTED.**
+#### Useful jump commands.
 
 | INSTRUCTION | OPCODE |HEX OPCODE|SIZE (BYTES) |DESCRIPTION | ASSEMBLER FORMAT 
 | ------: | :------: | :-----: |:---:|:-------|:-------|

@@ -1,3 +1,10 @@
 set 0a00 10
+mov 0a00 0a01
+add 0a00 0a01
+sub 0a00 0a01
+not 0a00
+and 0a01 0a02
+or 0a02 0a03
+xor 0a02 0a03
+print 0a01
 nop
-print 0a00

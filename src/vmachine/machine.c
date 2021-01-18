@@ -26,14 +26,14 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
     if (verbose){
         int used = getUsedMemory(memory, memSize);
         printf("VERBOSE MODE   | |  ");
-        printf("LOADED MEMORY: %d bytes  | |  TOTAL MEMORY: %d bytes\n", used, memSize);
-        printf("INSTRUCTION  ADDRESS   OPCODE        DESCRIPTION \n");
+        printf("LOADED MEMORY: %d bytes  | |  TOTAL MEMORY: %d bytes\n\n", used, memSize);
+        printf("INSTRUCTION  ADDRESS   OPCODE      DESCRIPTION \n");
     }
     int execRegister = 0;
     int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("INS:%05d    0x%04X    >:[OP %02X]     ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("INS:%05d    0x%04X    >:OP %02X     ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
         /*
@@ -49,6 +49,7 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
 void exeInstruction(memcell* memory, int* currentAddress, int verbose){
     unsigned short addressRefA = getShortFromCell(memory, *currentAddress + 1);
     unsigned short addressRefB = getShortFromCell(memory, *currentAddress + 3);
+    unsigned short addressRefC = getShortFromCell(memory, *currentAddress + 5);
 
     switch(memory[*currentAddress]){
 
@@ -59,8 +60,8 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
 
         case 0: //HALT
             if (verbose) {
-                printf("STOP\n");
-                printf("STOPPED AT ADDRESS 0x%04X\n", *currentAddress);
+                printf("STOP\n\n");
+                printf("STOPPED AT ADDRESS 0x%04X    ||    ", *currentAddress);
                 printf("MEMORY USE AT STOP: %d bytes\n", getUsedMemory(memory, MEMORY_SIZE));
             }
             exit(0);
@@ -72,7 +73,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             break;
 
         case 2: //MOV
-            if (verbose) printf("MOV 0x%04X TO 0x%04X\n", addressRefA, addressRefB);
+            if (verbose) printf("MOV 0x%04X TO 0x%04X\n", addressRefB, addressRefA);
             memory[addressRefA] = memory[addressRefB];
             *currentAddress += 5;
             break;
@@ -147,6 +148,81 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             *currentAddress += 3;
             break;
 
+        //EXTENDED INSTRUCTION SET
+
+        case 13: //JMZ
+            if(memory[addressRefB] == 0){
+                if (verbose) printf("JMZ TO 0x%04X (EVAL AT 0x%04X)\n", addressRefA, addressRefB);
+                *currentAddress = addressRefA;
+                break;
+            }
+            else {
+                if (verbose) printf("JMZ NO JUMP (EVAL AT 0x%04X)\n", addressRefB);
+                *currentAddress += 5;
+                break;
+            }
+
+        case 14: //JEQ
+            if(memory[addressRefB] == memory[addressRefC]){
+                if (verbose) printf("JEQ TO 0x%04X (EVAL AT 0x%04X == 0x%04X)\n", addressRefA, addressRefB, addressRefC);
+                *currentAddress = addressRefA;
+                break;
+            }
+            else {
+                if (verbose) printf("JEQ NO JUMP (EVAL AT 0x%04X == 0x%04X)\n", addressRefB, addressRefC);
+                *currentAddress += 7;
+                break;
+            }
+
+        case 15: //JLT
+            if(memory[addressRefB] < memory[addressRefC]){
+                if (verbose) printf("JLT TO 0x%04X (EVAL AT 0x%04X < 0x%04X)\n", addressRefA, addressRefB, addressRefC);
+                *currentAddress = addressRefA;
+                break;
+            }
+            else {
+                if (verbose) printf("JLT NO JUMP (EVAL AT 0x%04X < 0x%04X)\n", addressRefB, addressRefC);
+                *currentAddress += 7;
+                break;
+            }
+        
+        case 16: //JGT
+            if(memory[addressRefB] > memory[addressRefC]){
+                if (verbose) printf("JGT TO 0x%04X (EVAL AT 0x%04X > 0x%04X)\n", addressRefA, addressRefB, addressRefC);
+                *currentAddress = addressRefA;
+                break;
+            }
+            else {
+                if (verbose) printf("JGT NO JUMP (EVAL AT 0x%04X > 0x%04X)\n", addressRefB, addressRefC);
+                *currentAddress += 7;
+                break;
+            }
+
+        case 17: //JLE
+            if(memory[addressRefB] <= memory[addressRefC]){
+                if (verbose) printf("JLE TO 0x%04X (EVAL AT 0x%04X <= 0x%04X)\n", addressRefA, addressRefB, addressRefC);
+                *currentAddress = addressRefA;
+                break;
+            }
+            else {
+                if (verbose) printf("JLE NO JUMP (EVAL AT 0x%04X <= 0x%04X)\n", addressRefB, addressRefC);
+                *currentAddress += 7;
+                break;
+            }
+
+        case 18: //JGE
+            if(memory[addressRefB] >= memory[addressRefC]){
+                if (verbose) printf("JGE TO 0x%04X (EVAL AT 0x%04X >= 0x%04X)\n", addressRefA, addressRefB, addressRefC);
+                *currentAddress = addressRefA;
+                break;
+            }
+            else {
+                if (verbose) printf("JGE NO JUMP (EVAL AT 0x%04X >= 0x%04X)\n", addressRefB, addressRefC);
+                *currentAddress += 7;
+                break;
+            }
+
+        //DEFAULT CASE
         default:
             printf("Error: Invalid opcode.\n");
             printf("Crash ocurred at address 0x%04X\n", *currentAddress);
