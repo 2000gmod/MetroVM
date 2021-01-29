@@ -19,3 +19,41 @@ int getUsedMemory(memcell* memory, int memSize){
     }
     return counter;
 }
+
+void addSizeBytes(memcell* memory, int addressA, int addressB, int byteCount){
+	int overflow = 0;
+	
+	for (int offset = byteCount - 1; offset >= 0; offset -= 1){
+		memcell byteA = memory[addressA + offset];
+		memcell byteB = memory[addressB + offset];
+
+		memcell byteOut = 0;
+		byteOut = byteA + byteB + overflow;
+
+		if ((int) byteA + (int) byteB > byteOut){
+			overflow = 1;
+		}
+		else overflow = 0;
+
+		memory[addressA + offset] = byteOut;
+	}
+}
+
+void subSizeBytes(memcell* memory, int addressA, int addressB, int byteCount){
+	int underflow = 0;
+	
+	for(int offset = byteCount - 1; offset >= 0; offset -= 1){
+		memcell byteA = memory[addressA + offset];
+		memcell byteB = memory[addressB + offset];
+
+		memcell byteOut = 0;
+		byteOut = byteA - byteB - underflow;
+
+		if((int) byteA - (int) byteB < byteOut){
+			underflow = 1;
+		}
+		else underflow = 0;
+
+		memory[addressA + offset] = byteOut;
+	}
+}

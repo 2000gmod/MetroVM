@@ -222,6 +222,16 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
                 break;
             }
 
+        //ADITIONAL INSTRUCTIONS
+        case 19: //ADDC
+            if (verbose) printf("ADDC 0x%04X TO 0x%04X SIZE %d BYTES", memory[addressRefA], memory[addressRefA + 3], memory[addressRefA + 1]);
+            addSizeBytes(memory, memory[addressRefA + 1], memory[addressRefA + 3], memory[addressRefA]);
+
+        case 20: //SUBC
+            if (verbose) printf("SUBC 0x%04X TO 0x%04X SIZE %d BYTES", memory[addressRefA], memory[addressRefA + 3], memory[addressRefA + 1]);
+            subSizeBytes(memory, memory[addressRefA + 1], memory[addressRefA + 3], memory[addressRefA]);
+
+
         //DEFAULT CASE
         default:
             printf("Error: Invalid opcode.\n");

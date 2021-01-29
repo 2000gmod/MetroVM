@@ -83,3 +83,10 @@ _Note: all letters represent a 2-byte memory address. The only exception is NUM,
 | **JGT** | 16 | 0x10 | 7 | Jumps if content of A is greater than content of B | jgt L A B
 | **JLE** | 17 | 0x11 | 7 | Jumps if content of A is less than or equal to content of B | jle L A B
 | **JGE** | 18 | 0x12 | 7 | Jumps if content of A is greater than or equal to the content of B | jge L A B 
+
+#### Additional arithmetic operations.
+
+| INSTRUCTION | OPCODE |HEX OPCODE|SIZE (BYTES) |DESCRIPTION | ASSEMBLER FORMAT 
+| ------: | :------: | :-----: |:---:|:-------|:-------|
+| **ADDC** | 19 | 0x13 | 6 | Adds two numbers of size S bytes. | addc S A B
+| **SUBC** | 20 | 0x14 | 6 | Substracts two numbers of size S bytes. | addc S A B
