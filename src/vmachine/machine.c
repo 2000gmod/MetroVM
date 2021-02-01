@@ -1,10 +1,13 @@
 #include "machine.h"
 #include "memfunc.h"
+#include "textfunc.h"
 
 void initMachine(memcell* memory, unsigned int memSize, FILE* file){
     //memory = (memcell*) malloc(memSize * sizeof(memcell));
     if(memory == NULL){
+        textColor(tRed);
         printf("Error while allocating, exiting...\n");
+        resetText();
         exit(0);
     }
     //clean memory
@@ -25,15 +28,15 @@ void initMachine(memcell* memory, unsigned int memSize, FILE* file){
 void runMachine(memcell* memory, unsigned int memSize, int verbose){
     if (verbose){
         int used = getUsedMemory(memory, memSize);
-        printf("VERBOSE MODE   | |  ");
-        printf("LOADED MEMORY: %d bytes  | |  TOTAL MEMORY: %d bytes\n\n", used, memSize);
-        printf("INSTRUCTION  ADDRESS   OPCODE      DESCRIPTION \n");
+        printf("VERBOSE MODE \n");
+        printf("LOADED MEMORY: %d bytes  ||  TOTAL MEMORY: %d bytes\n\n", used, memSize);
+        printf("INSTRUCTION  ADDRESS   OPCODE    DESCRIPTION \n");
     }
     int execRegister = 0;
     int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("INS:%05d    0x%04X    >:OP %02X     ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("%.9d  | 0x%04X  | OP %02X   | ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
         /*
@@ -42,7 +45,9 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
             return;
         }*/
     }
-    printf("Execution address exceeded max value.\n");
+    textColor(tRed);
+    printf("\nFatal error: Execution address exceeded max value.\n");
+    resetText();
     return;
 }
 
@@ -58,12 +63,13 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             *currentAddress += 1;
             break;
 
-        case 0: //HALT
+        case 0: //STOP
             if (verbose) {
                 printf("STOP\n\n");
                 printf("STOPPED AT ADDRESS 0x%04X    ||    ", *currentAddress);
                 printf("MEMORY USE AT STOP: %d bytes\n", getUsedMemory(memory, MEMORY_SIZE));
             }
+            free(memory);
             exit(0);
 
         case 1: //SET
@@ -135,9 +141,11 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
             if (verbose){
                 printf("PRINT 0x%04X   : ", addressRefA);
                 if (memory[addressRefA] >= 32) printf("%c", memory[addressRefA]);
-		else printf(" ");
+		        else printf(" ");
+
                 printf("   (0x%02X)\n", memory[addressRefA]);
             }
+
             else printf("%c", memory[addressRefA]);
             *currentAddress += 3;
             break;
@@ -235,8 +243,11 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
 
         //DEFAULT CASE
         default:
+            textColor(tRed);
             printf("Error: Invalid opcode.\n");
             printf("Crash ocurred at address 0x%04X\n", *currentAddress);
+            resetText();
+            free(memory);
             exit(-1);
     }
     return;
