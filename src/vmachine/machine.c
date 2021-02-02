@@ -36,7 +36,7 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
     int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("%.9d  | 0x%04X  | OP %02X   | ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("% 9d  | 0x%04X  | OP %02X   | ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
         /*
