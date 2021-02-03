@@ -7,7 +7,7 @@ _MetroVM is a virtual CPU that executes instructions inside a virtual RAM._
 ## USAGE
 Compile all the `.c` files inside the `src/vmachine` directory using the compiler of your choice.<br> 
 Run the virtual machine using the following bash command: <br>
-`./vmachine [VM EXECUTABLE FILEPATH]`<br>
+`./metrovm [VM EXECUTABLE FILEPATH]`<br>
 
 In order to see a detailed log of all instructions performed at runtime, you can add the `-v` (verbose) flag to the end of the run command.
 
