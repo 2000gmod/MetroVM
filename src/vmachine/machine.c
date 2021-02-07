@@ -6,7 +6,7 @@ void initMachine(memcell* memory, unsigned int memSize, FILE* file){
     //memory = (memcell*) malloc(memSize * sizeof(memcell));
     if(memory == NULL){
         textColor(tRed);
-        printf("Error while allocating, exiting...\n");
+        printf("Fatal error: memory allocation failed.\n");
         resetText();
         exit(0);
     }
@@ -244,7 +244,7 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
         //DEFAULT CASE
         default:
             textColor(tRed);
-            printf("Error: Invalid opcode.\n");
+            printf("Fatal error: Invalid opcode.\n");
             printf("Crash ocurred at address 0x%04X\n", *currentAddress);
             resetText();
             free(memory);

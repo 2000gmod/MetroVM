@@ -10,15 +10,17 @@
 int main(int argc, char** argv){
     if(argc == 1){
         textColor(tRed);
-        printf("Error: No executable file (.vx) specified.\n");
+        printf("Fatal error: No executable file specified.\n");
         resetText();
+	printf("Execution aborted.\n");
         return -1;
     }
     FILE *file = fopen(argv[1], "r");
     if (file == NULL){
         textColor(tRed);
-        printf("Error while opening file.\n");
+        printf("Fatal error: file.\n");
         resetText();
+	printf("File does not exist or is unreadable.\n");
         return -1;
     }
 
