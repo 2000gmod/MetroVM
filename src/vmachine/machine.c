@@ -36,7 +36,7 @@ void runMachine(memcell* memory, unsigned int memSize, int verbose){
     int instructionCount = 1;
 
     while(execRegister < memSize){
-        if (verbose) printf("% 9d  | 0x%04X  | OP %02X   | ", instructionCount, execRegister, memory[execRegister]);
+        if (verbose) printf("% 9d  | 0x%04X  | 0x%02X    | ", instructionCount, execRegister, memory[execRegister]);
         exeInstruction(memory, &execRegister, verbose);
         instructionCount++;
         /*
@@ -234,11 +234,13 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
         case 19: //ADDC
             if (verbose) printf("ADDC 0x%04X TO 0x%04X SIZE %d BYTES", memory[addressRefA], memory[addressRefA + 3], memory[addressRefA + 1]);
             addSizeBytes(memory, memory[addressRefA + 1], memory[addressRefA + 3], memory[addressRefA]);
+            *currentAddress += 6;
             break;
 
         case 20: //SUBC
             if (verbose) printf("SUBC 0x%04X TO 0x%04X SIZE %d BYTES", memory[addressRefA], memory[addressRefA + 3], memory[addressRefA + 1]);
             subSizeBytes(memory, memory[addressRefA + 1], memory[addressRefA + 3], memory[addressRefA]);
+            *currentAddress += 6;
             break;
 
         //DEFAULT CASE
