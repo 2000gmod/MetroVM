@@ -4,7 +4,7 @@
 
 unsigned short getShortFromCell(memcell* memory, int address);
 int getUsedMemory(memcell* memory, int memSize);
-void addSizeBytes(memcell* memory, int addressA, int addressB, int byteCount);
-void subSizeBytes(memcell* memory, int addressA, int addressB, int byteCount);
+void addSizeBytes(memcell* memory, unsigned short addressA, unsigned short addressB, memcell byteCount);
+void subSizeBytes(memcell* memory, unsigned short addressA, unsigned short addressB, memcell byteCount);
 
 #endif

@@ -20,7 +20,7 @@ int getUsedMemory(memcell* memory, int memSize){
     return counter;
 }
 
-void addSizeBytes(memcell* memory, int addressA, int addressB, int byteCount){
+void addSizeBytes(memcell* memory, unsigned short addressA, unsigned short addressB, memcell byteCount){
 	int overflow = 0;
 	
 	for (int offset = byteCount - 1; offset >= 0; offset -= 1){
@@ -39,7 +39,7 @@ void addSizeBytes(memcell* memory, int addressA, int addressB, int byteCount){
 	}
 }
 
-void subSizeBytes(memcell* memory, int addressA, int addressB, int byteCount){
+void subSizeBytes(memcell* memory, unsigned short addressA, unsigned short addressB, memcell byteCount){
 	int underflow = 0;
 	
 	for(int offset = byteCount - 1; offset >= 0; offset -= 1){

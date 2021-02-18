@@ -232,14 +232,14 @@ void exeInstruction(memcell* memory, int* currentAddress, int verbose){
 
         //ADITIONAL INSTRUCTIONS
         case 19: //ADDC
-            if (verbose) printf("ADDC 0x%04X TO 0x%04X SIZE %d BYTES", memory[addressRefA], memory[addressRefA + 3], memory[addressRefA + 1]);
-            addSizeBytes(memory, memory[addressRefA + 1], memory[addressRefA + 3], memory[addressRefA]);
+            if (verbose) printf("ADDC 0x%04X TO 0x%04X SIZE %d BYTES\n", memory[*currentAddress + 2], memory[*currentAddress + 4], memory[*currentAddress + 1]);
+            addSizeBytes(memory, memory[*currentAddress + 2], memory[*currentAddress + 4], memory[*currentAddress + 1]);
             *currentAddress += 6;
             break;
 
         case 20: //SUBC
-            if (verbose) printf("SUBC 0x%04X TO 0x%04X SIZE %d BYTES", memory[addressRefA], memory[addressRefA + 3], memory[addressRefA + 1]);
-            subSizeBytes(memory, memory[addressRefA + 1], memory[addressRefA + 3], memory[addressRefA]);
+            if (verbose) printf("SUBC 0x%04X TO 0x%04X SIZE %d BYTES\n", memory[*currentAddress + 2], memory[*currentAddress + 4], memory[*currentAddress + 1]);
+            subSizeBytes(memory, memory[*currentAddress + 2], memory[*currentAddress + 4], memory[*currentAddress + 1]);
             *currentAddress += 6;
             break;
 
